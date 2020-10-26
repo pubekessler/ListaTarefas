@@ -2,15 +2,14 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exception.ItemNullException;
+import com.example.demo.exception.ListaNullException;
 import com.example.demo.model.Item;
 import com.example.demo.model.Lista;
 import com.example.demo.repository.ItemRepository;
-import com.example.demo.repository.ListaRepository;
 
 @Service
 public class ItemService {
@@ -34,25 +33,40 @@ public class ItemService {
 
 	}
 
-	public void delete(Long id) {
-		Item item=repository.getOne(id);
-		repository.delete(item);;
+	public void delete(Long id) throws ItemNullException {
+		try {
+			Item item = repository.getOne(id);
+			repository.delete(item);
+
+		} catch (Exception e) {
+			throw new ItemNullException();
+		}
 
 	}
 
-	public Item setarItemRealizado(Long id) {
+	public Item setarItemRealizado(Long id) throws ItemNullException {
+		Item item = null;
+		try {
+			item = repository.getOne(id);
+		} catch (Exception e) {
+			throw new ItemNullException();
+		}
 
-		Item item = repository.getOne(id);
 		item.setRealizada(true);
 		return atualizar(item);
 
 	}
 
-	public List<Item> buscarPorLista(Long id) {
-		Lista lista=new Lista();
-		lista.setId(id);
-		return repository.findAllByLista(lista);
-		
+	public List<Item> buscarPorLista(Long id) throws ListaNullException {
+		try {
+
+			Lista lista = new Lista();
+			lista.setId(id);
+			return repository.findAllByLista(lista);
+		} catch (Exception e) {
+			throw new ListaNullException();
+		}
+
 	}
 
 }

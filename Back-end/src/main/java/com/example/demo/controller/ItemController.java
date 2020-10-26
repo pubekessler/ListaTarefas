@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.exception.ItemNullException;
+import com.example.demo.exception.ListaNullException;
 import com.example.demo.model.Item;
-import com.example.demo.model.Lista;
 import com.example.demo.service.ItemService;
 
 @RestController
@@ -48,7 +49,7 @@ public class ItemController {
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json;charset=UTF-8")
-	public void delete(@PathVariable Long id) {
+	public void delete(@PathVariable Long id) throws ItemNullException {
 		service.delete(id);
 
 	}
@@ -67,7 +68,7 @@ public class ItemController {
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/concluir/{id}", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public Item ItemRealizado(@PathVariable Long id) {
+	public Item ItemRealizado(@PathVariable Long id) throws ItemNullException {
 
 		return service.setarItemRealizado(id);
 
@@ -78,7 +79,7 @@ public class ItemController {
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/porLista/{id}", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-	public List<Item> BuscarPorLista(@PathVariable Long id) {
+	public List<Item> BuscarPorLista(@PathVariable Long id) throws ListaNullException {
 		return service.buscarPorLista(id);
 
 	}

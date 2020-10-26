@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.exception.ListaNullException;
 import com.example.demo.model.Lista;
 import com.example.demo.service.ListaService;
 
@@ -42,22 +43,13 @@ public class ListaController {
 		return service.criarOuAtualizar(lista);
 
 	}
+
 	@CrossOrigin(origins = "*", maxAge = 7200)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "application/json;charset=UTF-8")
 	public void delete(@PathVariable Long id) {
 		service.delete(id);
-
-	}
-
-	@CrossOrigin(origins = "*", maxAge = 7200)
-	@ResponseBody
-	@ResponseStatus(HttpStatus.OK)
-	@RequestMapping(method = RequestMethod.PUT, produces = "application/json;charset=UTF-8")
-	public Lista update(@RequestBody @Valid Lista lista) {
-
-		return service.criarOuAtualizar(lista);
 
 	}
 

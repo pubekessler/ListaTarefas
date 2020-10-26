@@ -2,11 +2,10 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.exception.ListaNullException;
 import com.example.demo.model.Lista;
 import com.example.demo.repository.ListaRepository;
 
@@ -23,15 +22,14 @@ public class ListaService {
 
 	public Lista criarOuAtualizar(Lista lista) {
 		return repository.save(lista);
-		
+
 	}
 
 	public void delete(Long id) {
-		Lista lista=repository.getOne(id);
-		repository.delete(lista);
-		
-	}
 
-	
+		Lista lista = repository.getOne(id);
+		repository.delete(lista);
+
+	}
 
 }
