@@ -118,7 +118,7 @@ import Axios from "axios"
 import Vue from 'vue'
 
 //local
-var url = "http://127.0.0.1:8090"
+//var url = "http://127.0.0.1:8090"
 //prod
 var url = "http://pcserver.ddns.net:8090"
 export default {
